@@ -1,8 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\StartGame.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GraphBuild.cs">
     <Files>
       <File FileName="Assets\StartGame.cs" Line="6" Column="29" />
+      <File FileName="Assets\Scripts\FitToScreen.cs" Line="12" Column="1" />
+      <File FileName="Assets\Scripts\ScrollMap.cs" Line="18" Column="20" />
+      <File FileName="Assets\PointBehaviour.cs" Line="9" Column="2" />
+      <File FileName="Assets\GraphBuild.cs" Line="18" Column="5" />
+      <File FileName="Assets\graph links.txt" Line="11" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
