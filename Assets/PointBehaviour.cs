@@ -3,14 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class PointBehaviour : MonoBehaviour {
-	public List<GameObject> neighbors = new List<GameObject> ();
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    private GraphBuild graphBuilder;
+
+    private void Start()
+    {
+        graphBuilder = GameObject.Find("Point Container").GetComponent<GraphBuild>();
+    }
+
+    private void OnMouseDown()
+    {
+        graphBuilder.DrawPath(gameObject);
+    }
+
+    private void OnMouseEnter()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+    }
+
+    private void OnMouseExit()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+    }
 }
