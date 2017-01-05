@@ -209,7 +209,7 @@ public class GraphBuild : MonoBehaviour {
 		public Node(int no){
 			this.no = no;
 			gameNode = GameObject.Find("Map Point (" + no + ")");
-		}
+        }
 
 		public int GetNo(){
 			return no;
@@ -219,14 +219,6 @@ public class GraphBuild : MonoBehaviour {
 			if (!neighbors.Contains (n)) {
 				neighbors.Add (n);
 			}
-            Color spriteColor = gameNode.GetComponent<SpriteRenderer>().color;
-            //if(neighbors.Count > 1) {
-            //    spriteColor.a = 1f;
-            //} else {
-            //    spriteColor.a = 0f;
-            //}
-            gameNode.GetComponent<SpriteRenderer>().color = spriteColor;
-
         }
 
 		public List<Node> GetNeighbors(){

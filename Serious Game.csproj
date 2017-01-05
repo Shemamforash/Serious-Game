@@ -68,7 +68,6 @@
   <ItemGroup>
     <Compile Include="Assets\GraphBuild.cs" />
     <Compile Include="Assets\PointBehaviour.cs" />
-    <Compile Include="Assets\Scripts\FitToScreen.cs" />
     <Compile Include="Assets\Scripts\KeyboardMovement.cs" />
     <Compile Include="Assets\Scripts\ScrollMap.cs" />
     <Compile Include="Assets\StartGame.cs" />

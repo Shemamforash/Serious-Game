@@ -4,24 +4,47 @@ using System.Collections.Generic;
 
 public class PointBehaviour : MonoBehaviour {
     private GraphBuild graphBuilder;
+    public bool junction = false;
+    public Sprite unpressed, pressed, hover;
 
     private void Start()
     {
         graphBuilder = GameObject.Find("Point Container").GetComponent<GraphBuild>();
+        Color spriteColor = gameObject.GetComponent<SpriteRenderer>().color;
+        if (junction) {
+            spriteColor.a = 1f;
+        } else {
+            spriteColor.a = 0f;
+        }
+        gameObject.GetComponent<SpriteRenderer>().color = spriteColor;
     }
 
     private void OnMouseDown()
     {
-        graphBuilder.DrawPath(gameObject);
+        if (junction) {
+            graphBuilder.DrawPath(gameObject);
+            gameObject.GetComponent<SpriteRenderer>().sprite = pressed;
+        }
+    }
+
+    private void OnMouseUp()
+    {
+        if (junction) {
+            gameObject.GetComponent<SpriteRenderer>().sprite = hover;
+        }
     }
 
     private void OnMouseEnter()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        if (junction) {
+            gameObject.GetComponent<SpriteRenderer>().sprite = hover;
+        }
     }
 
     private void OnMouseExit()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+        if (junction) {
+            gameObject.GetComponent<SpriteRenderer>().sprite = unpressed;
+        }
     }
 }
