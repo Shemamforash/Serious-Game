@@ -11,6 +11,12 @@ public class GraphBuild : MonoBehaviour {
     public GameObject start, end;
     private Node startNode;
 
+    //for the route challenge
+    private Node currentNode;
+    private Dictionary<Node, List<Node>> nextNodes = new Dictionary<Node, List<Node>>();
+    //node nos = 1-[14,91] 14-[91,11] 91-[11,95] 11-[98,91] 98-[33,30] 95-[33,36] 33-[95,36] 36-[72,46] 30-[72,74] 74-[72,48] 72-[48,74]
+
+
 	void Start () {
 		foreach (string line in File.ReadAllLines("./Assets/graph links.txt")) {
    			List<int> path = new List<int> ();
@@ -34,7 +40,53 @@ public class GraphBuild : MonoBehaviour {
                 edges.Add(e);
 			}
 		}
-	}
+        AddToDict(1, new int[] { 14, 91 });
+        AddToDict(14, new int[] { 91, 11 });
+        AddToDict(91, new int[] { 11, 95 });
+        AddToDict(11, new int[] { 98, 91 });
+        AddToDict(98, new int[] { 33, 30 });
+        AddToDict(95, new int[] { 33, 36 });
+        AddToDict(33, new int[] { 95, 36 });
+        AddToDict(36, new int[] { 72, 46 });
+        AddToDict(30, new int[] { 72, 74 });
+        AddToDict(74, new int[] { 72, 48 });
+        AddToDict(72, new int[] { 48, 74 });
+        ActivateNextRoute(start.name);
+    }
+
+    public void ActivateNextRoute(string nodeName)
+    {
+        nodeName = nodeName.Substring(0, nodeName.Length - 1);
+        nodeName = nodeName.Remove(0, 11);
+        int nodeNo = int.Parse(nodeName);
+        currentNode = map.Find(item => item.GetNo() == nodeNo);
+        
+        foreach (Node n in map) {
+            if (nextNodes.Keys.Contains(n)) {
+                if (!nextNodes[currentNode].Contains(n)) {
+                    n.GetGameNode().SetActive(false);
+                } else {
+                    n.GetGameNode().SetActive(true);
+                }
+            }
+        }
+    }
+
+    private void AddToDict(int origin, int[] targets)
+    {
+        foreach(Node n in map) {
+            if(n.GetNo() == origin) {
+                List<Node> targetNodes = new List<Node>();
+                foreach(Node n2 in map) {
+                    if (targets.Contains(n2.GetNo())) {
+                        targetNodes.Add(n2);
+                    }
+                }
+                nextNodes[n] = targetNodes;
+                break;
+            }
+        }
+    }
 
     public void ToggleLine(GameObject start, GameObject end, bool active)
     {
@@ -62,7 +114,6 @@ public class GraphBuild : MonoBehaviour {
         distances[startNode] = 0;
 
         while (q.Count > 0) {
-            //Node nearestNode = distances.OrderBy(pair => pair.Value).Take(1).First().Key;
             Node nearestNode = null;
             foreach(Node n in q) {
                 if(nearestNode == null) {
@@ -92,37 +143,6 @@ public class GraphBuild : MonoBehaviour {
                 }
             }
         }
-
-        //Queue<Node> q = new Queue<Node>();
-        //Dictionary<Node, Node> path = new Dictionary<Node, Node>();
-        //List<Node> visited = new List<Node>();
-        //q.Enqueue(startNode);
-        //path.Add(startNode, null);
-        //visited.Add(startNode);
-
-        //while (q.Count > 0) {
-        //    Node current = q.Dequeue();
-        //    if (current.GetGameNode() == target) {
-        //        Node last = current;
-        //        path.TryGetValue(last, out current);
-        //        while (current != null) {
-        //            ToggleLine(last.GetGameNode(), current.GetGameNode(), true);
-        //            last = current;
-        //            path.TryGetValue(last, out current);
-        //        }
-        //        break;
-        //    }
-        //    if (current == null) {
-        //        Debug.Log("No path available");
-        //    }
-        //    foreach (Node neighbor in current.GetNeighbors()) {
-        //        if (!visited.Contains(neighbor)) {
-        //            visited.Add(neighbor);
-        //            path.Add(neighbor, current);
-        //            q.Enqueue(neighbor);
-        //        }
-        //    }
-        //}
     }
 
     private void Update()

@@ -23,6 +23,7 @@ public class PointBehaviour : MonoBehaviour {
     {
         if (junction) {
             graphBuilder.DrawPath(gameObject);
+            graphBuilder.ActivateNextRoute(gameObject.name);
             gameObject.GetComponent<SpriteRenderer>().sprite = pressed;
         }
     }
