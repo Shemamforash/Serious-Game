@@ -1,0 +1,15 @@
+Question 1:
+	After aligning the direction housing, the needle housing must be aligned with what?
+	A: The north-aligned map gridlines.
+	B: The compass needle (Pointing North)
+	C: The line between the start and end point of this route segment.
+Question 2:
+	
+Question 3:
+Question 4:
+Question 5:
+Question 6:
+Question 7:
+Question 8:
+Question 9:
+Question 10:
