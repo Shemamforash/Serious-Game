@@ -84,6 +84,7 @@ public class StudentTest : MonoBehaviour {
 		scoreContainer.transform.Find("Text").GetComponent<Text>().text = "You finished the test!\n" +
 			"Final Score: " + playerScore + "/" + totalScore + "\n\n" +
 			suggestion;
+		PlayerData.TestScore = playerScore;
 	}
 
 	void NextQuestion(){
