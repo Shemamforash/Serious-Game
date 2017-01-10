@@ -8,6 +8,7 @@ public class KeyboardMovement : MonoBehaviour
     public GameObject directionHousing, compassHousing, compassNeedle;
     private GameObject currentObject;
     private Quaternion needleRotation;
+    private RotationBehaviour rotationScript;
 
     private bool movementLocked = false; //if movement locked is false directionHousing is the current object then movement is allowed, if movement locked true opposite is true
 
@@ -16,6 +17,7 @@ public class KeyboardMovement : MonoBehaviour
         currentObject = directionHousing;
         Vector3 tempRotation = new Vector3(0, 0, Random.Range(0, 360));
         needleRotation = Quaternion.Euler(tempRotation);
+        rotationScript = gameObject.GetComponent<RotationBehaviour>();
     }
 
     void PointNorth()
@@ -68,6 +70,11 @@ public class KeyboardMovement : MonoBehaviour
             currentPosition.x = currentPosition.x + diff.x;
             currentPosition.y = currentPosition.y + diff.y;
             currentObject.transform.position = currentPosition;
+            rotationScript.SetCurrentObject(directionHousing);
+            rotationScript.DefaultVector();
+        } else {
+            rotationScript.SetCurrentObject(compassHousing);
+            rotationScript.SetVector(new Vector2(0, 1));
         }
 
         // rotation is always allowed
