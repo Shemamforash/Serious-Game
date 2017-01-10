@@ -1,14 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
 public class RotationBehaviour : MonoBehaviour {
 
-    public GameObject pointA, pointB, directionHousing, compassHousing;
-    private GameObject currentObject;
+    public GameObject directionHousing, compassHousing;
+    private GameObject currentObject, pointA, pointB;
     public Vector2 vector;
 
     void Start () {
+        List<GameObject> points = new List<GameObject>(GameObject.FindGameObjectsWithTag("Point"));
+        System.Random rand = new System.Random();
+        int position = rand.Next(0, points.Count-1);
+        pointA = points[position];
+        pointA.GetComponent<SpriteRenderer>().color = Color.red;
+        points.RemoveAt(position);
+        position = rand.Next(0, points.Count-1);
+        pointB = points[position];
+        pointB.GetComponent<SpriteRenderer>().color = Color.green;
+        points.RemoveAt(position);
+        foreach(GameObject point in points) {
+            point.SetActive(false);
+        }
         DefaultVector();
         currentObject = directionHousing;
 	}
