@@ -1,5 +1,5 @@
 Question 1
-After aligning the direction housing, the needle housing must be aligned with what?
+After aligning the direction of travel arrow, the orientation lines must be aligned with what?
 A: The north-aligned map gridlines.
 B: The compass needle (Pointing North)
 C: The line between the start and end point of this route segment.
@@ -7,12 +7,12 @@ Question 2
 Which of the following parts of the map remain unchanged depending on the map scale?
 A: The orientation of the gridlines.
 B: The real-world distance between gridlines.
-C: The both the orientation and real-world distance between gridlines.
+C: Both the orientation and real-world distance between gridlines.
 Question 3
-The direction arrow on the compass housing must be aligned in which way?
-A: From the start of the route to the end of the route.
-B: From the end of the route to the start of the route.
-C: In the direction of the north gridline.
+The direction arrow on the baseplate must be aligned with what?
+A: The start of the route to the end of the route.
+B: The end of the route to the start of the route.
+C: The north gridline.
 Question 4
 Which of the following statements is correct?
 A: It is not necessary to orient the map itself to find take a bearing.
@@ -20,8 +20,8 @@ B: You can follow a route using a compass even if you do not know your location.
 C: Compasses point to the geographic north.
 Question 5
 Which of the following statements best describes the procedure of orienting yourself with a compass?
-A: Align the compass from your start position to your end position. Align the compass arrows with the gridlines. Align the compass arrows with the compass needle.
-B: Align the compass with the gridlines. Rotate the compass arrows from your start position to your end position. Align the compass arrows with the compass needle.
+A: Align the direction of travel arrow from your start position to your end position. Align the orientation lines with the gridlines. Rotate the entire compass until the orientation lines align with the compass needle.
+B: Align the direction of travel arrow with the gridlines. Rotate the orientation lines from your start position to your end position. Rotate the entire compass until the orientation lines align with the compass needle.
 C: Align the map gridlines with the compass needle. Walk in the direction of the needle.
 Question 6
 When planning a route to take, which of the following should you avoid?
@@ -30,17 +30,17 @@ B: All roads, farmland, fences, hills.
 C: Steep gradients, settlements, marshes.
 Question 7
 You are at a junction with 3 possible routes to your destination, which is the best route to take?
-A: The 2km route, which runs along a ridge with cliffs.
+A: The 7km route, which goes across farmland.
 B: The 5km route, which occasionally goes along a main road.
-C: The 7km route, which goes across farmland.
+C: The 2km route, which runs along a ridge with cliffs.
 Question 8
 Which of the following statements is correct?
-A: One can avoid plotting a dangerous route by looking carefully at the map symbols.
+A: Danger on a route can be anticipated using the map symbols, but is affected by conditions during the walk.
 B: A dangerous route depends solely on the conditions at the time (e.g. weather, traffic).
-C: Danger on a route can be anticipated using the map symbols, but is affected by conditions during the walk.
+C: One can avoid plotting a dangerous route by looking carefully at the map symbols.
 Question 9
 If you don't recognise a map symbol or cannot read the map for some reason you should:
-A: Continue with the route, but stop before you reach the location of the symbol to investigate what is there.
+A: Find an entirely different route of which you understand all the symbols.
 B: Plot the route around the map symbol just in case it is a hazard.
-C: Find an entirely different route of which you understand all the symbols.
+C: Continue with the route, but stop before you reach the location of the symbol to investigate what is there.
 Question 10
