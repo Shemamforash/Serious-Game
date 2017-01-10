@@ -29,5 +29,14 @@ public class RotationBehaviour : MonoBehaviour {
         housingVector.x = (float)Math.Sin(y);
         housingVector.y = (float)Math.Cos(y);
         float angleDiff = (float)Vector2.Angle(directionVector, housingVector);
+        double score = 0;
+        //now for the scoring
+        //full points if the angle is between 0 and 10
+        if(angleDiff < 10) {
+            score = 1;
+        } else {
+            score = 3 * (Math.Pow(angleDiff - 2, -0.2)) - 1;
+        }
+        int actualScore = (int)Math.Floor(score * 100);
 	}
 }
