@@ -6,13 +6,13 @@ public class LevelSelect : MonoBehaviour {
 	public GameObject routeScoreObject, compassScoreObject;
 	// Use this for initialization
 	void Start () {
-		routeScoreObject.GetComponent<Text>().text = "Best Score: " + PlayerData.RouteScore;
-		compassScoreObject.GetComponent<Text>().text = "Best Score: " + PlayerData.CompassScore.ToString();
+		routeScoreObject.GetComponent<Text>().text = "Best Score: " + PlayerData.GetRouteScore();
+		compassScoreObject.GetComponent<Text>().text = "Best Score: " + PlayerData.CompassScore;
 	}
 	
 	// Update is called once per frame
 	public void LoadRouteFinding(){
-		SceneManager.LoadScene("Route Challenge");
+		SceneManager.LoadScene("Route Guide");
 	}
 
 	public void LoadCompassReading(){
