@@ -3,19 +3,24 @@ using System.Collections.Generic;
 using System;
 using System.IO;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class GraphBuild : MonoBehaviour {
 	private List<Node> map = new List<Node> ();
 	public GameObject lineObject;
     private List<Edge> edges = new List<Edge>();
     public GameObject start, end;
-    private Node startNode;
 
     //for the route challenge
     private Node currentNode;
     private Dictionary<Node, List<Node>> nextNodes = new Dictionary<Node, List<Node>>();
     //node nos = 1-[14,91] 14-[91,11] 91-[11,95] 11-[98,91] 98-[33,30] 95-[33,36] 33-[95,36] 36-[72,46] 30-[72,74] 74-[72,48] 72-[48,74]
 
+    private List<Node> playerPath = new List<Node>();
+    private List<Edge> linePath = new List<Edge>();
+
+    private bool endAllowed = false;
+    private float currentLength = 0, pathDanger = 0;
 
 	void Start () {
 		foreach (string line in File.ReadAllLines("./Assets/graph links.txt")) {
@@ -40,35 +45,54 @@ public class GraphBuild : MonoBehaviour {
                 edges.Add(e);
 			}
 		}
-        AddToDict(1, new int[] { 14, 91 });
+        AddToDict(1, new int[] { 14, 7 });
         AddToDict(14, new int[] { 91, 11 });
         AddToDict(91, new int[] { 11, 95 });
         AddToDict(11, new int[] { 98, 91 });
         AddToDict(98, new int[] { 33, 30 });
         AddToDict(95, new int[] { 33, 36 });
         AddToDict(33, new int[] { 95, 36 });
-        AddToDict(36, new int[] { 72, 46 });
+        AddToDict(36, new int[] { 72, 48 });
         AddToDict(30, new int[] { 72, 74 });
         AddToDict(74, new int[] { 72, 48 });
         AddToDict(72, new int[] { 48, 74 });
-        ActivateNextRoute(start.name);
+        AddToDict(7, new int[] {91, 95});
+        AddToPlayerPath(start);
     }
 
-    public void ActivateNextRoute(string nodeName)
-    {
+    public void AddToPlayerPath(GameObject pointObject){
+        Node pointNode = FindNodeFromGameObject(pointObject);
+
+        string nodeName = pointObject.name;
         nodeName = nodeName.Substring(0, nodeName.Length - 1);
         nodeName = nodeName.Remove(0, 11);
         int nodeNo = int.Parse(nodeName);
         currentNode = map.Find(item => item.GetNo() == nodeNo);
-        
-        foreach (Node n in map) {
-            if (nextNodes.Keys.Contains(n)) {
-                if (!nextNodes[currentNode].Contains(n)) {
-                    n.GetGameNode().SetActive(false);
-                } else {
-                    n.GetGameNode().SetActive(true);
+        Node endNode = FindNodeFromGameObject(end);
+
+        if(pointObject != end){
+            if(nextNodes[currentNode].Contains(endNode)){
+                endAllowed = true;
+            }
+            playerPath.Add(pointNode);
+            pathDanger += pointObject.GetComponent<PointBehaviour>().GetDanger();
+            foreach (Node n in map) {
+                if (nextNodes.Keys.Contains(n)) {
+                    if ((!nextNodes[currentNode].Contains(n) || playerPath.Contains(n)) && n != FindNodeFromGameObject(start)) {
+                        n.GetGameNode().SetActive(false);
+                    } else {
+                        n.GetGameNode().SetActive(true);
+                    }
                 }
             }
+
+            if(playerPath.Count > 1){
+                GameObject prevNode = playerPath[playerPath.Count - 2].GetGameNode();
+                DrawPath(prevNode, pointObject);
+            }
+        } else if(endAllowed){
+            PlayerData.SetRouteScore(pathDanger, currentLength);
+            SceneManager.LoadScene("Route Score Screen");
         }
     }
 
@@ -88,30 +112,38 @@ public class GraphBuild : MonoBehaviour {
         }
     }
 
-    public void ToggleLine(GameObject start, GameObject end, bool active)
+    private void ToggleLine(Edge e, bool active)
     {
-        Edge e = FindEdge(start, end);
         if(e != null) {
             e.GetLine().SetActive(active);
         }
     }
 
-    public void DrawPath(GameObject target)
-    {
-        foreach(Edge e in edges) {
-            e.GetLine().SetActive(false);
+    private Node FindNodeFromGameObject(GameObject g){
+        foreach(Node n in map){
+            if(n.GetGameNode() == g){
+                return n;
+            }
         }
+        return null;
+    }
+
+    public void DrawPath(GameObject origin, GameObject target)
+    {
+        Node originNode = FindNodeFromGameObject(origin);
+        Node targetNode = FindNodeFromGameObject(target);
+
         List<Node> q = new List<Node>();
         Dictionary<Node, Node> path = new Dictionary<Node, Node>();
         Dictionary<Node, float> distances = new Dictionary<Node, float>();
-        path.Add(startNode, null);
+        path.Add(originNode, null);
 
         foreach (Node n in map) {
             distances.Add(n, 1000000f);
             q.Add(n);
         }
 
-        distances[startNode] = 0;
+        distances[originNode] = 0;
 
         while (q.Count > 0) {
             Node nearestNode = null;
@@ -124,11 +156,12 @@ public class GraphBuild : MonoBehaviour {
             }
             q.Remove(nearestNode);
 
-            if (nearestNode.GetGameNode() == target) {
+            if (nearestNode == targetNode) {
+                currentLength += distances[nearestNode];
                 Node last = nearestNode;
                 path.TryGetValue(last, out nearestNode);
                 while (nearestNode != null) {
-                    ToggleLine(last.GetGameNode(), nearestNode.GetGameNode(), true);
+                    linePath.Add(FindEdge(last.GetGameNode(), nearestNode.GetGameNode()));
                     last = nearestNode;
                     path.TryGetValue(last, out nearestNode);
                 }
@@ -137,11 +170,18 @@ public class GraphBuild : MonoBehaviour {
 
             foreach (Node neighbor in nearestNode.GetNeighbors()) {
                 float newDistance = distances[nearestNode] + FindEdge(nearestNode.GetGameNode(), neighbor.GetGameNode()).GetDistance();
+                if(neighbor.GetGameNode().GetComponent<PointBehaviour>().IsJunction() && neighbor != targetNode){
+                    newDistance = 100000f;
+                }
                 if (newDistance < distances[neighbor]) {
                     distances[neighbor] = newDistance;
                     path[neighbor] = nearestNode;
                 }
             }
+        }
+
+        foreach(Edge e in edges) {
+            ToggleLine(e, linePath.Contains(e));
         }
     }
 
@@ -159,9 +199,6 @@ public class GraphBuild : MonoBehaviour {
 			}
 		}
         Node newNode = new Node(val);
-        if(newNode.GetGameNode() == start) {
-            startNode = newNode;
-        }
         map.Add(newNode);
 		return newNode;
 	}

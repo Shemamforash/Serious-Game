@@ -7,6 +7,8 @@ public class PointBehaviour : MonoBehaviour {
     public bool junction = false;
     public Sprite unpressed, pressed, hover;
 
+    public float danger = 0;
+
     private void Start()
     {
         graphBuilder = GameObject.Find("Point Container").GetComponent<GraphBuild>();
@@ -19,11 +21,18 @@ public class PointBehaviour : MonoBehaviour {
         gameObject.GetComponent<SpriteRenderer>().color = spriteColor;
     }
 
+    public float GetDanger(){
+        return danger;
+    }
+
+    public bool IsJunction(){
+        return junction;
+    }
+
     private void OnMouseDown()
     {
         if (junction) {
-            graphBuilder.DrawPath(gameObject);
-            graphBuilder.ActivateNextRoute(gameObject.name);
+            graphBuilder.AddToPlayerPath(gameObject);
             gameObject.GetComponent<SpriteRenderer>().sprite = pressed;
         }
     }
