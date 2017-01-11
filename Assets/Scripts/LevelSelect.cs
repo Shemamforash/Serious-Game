@@ -7,7 +7,7 @@ public class LevelSelect : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		routeScoreObject.GetComponent<Text>().text = "Best Score: " + PlayerData.GetRouteScore();
-		compassScoreObject.GetComponent<Text>().text = "Best Score: " + PlayerData.CompassScore;
+		compassScoreObject.GetComponent<Text>().text = "Best Score: " + PlayerData.GetCompassScore();
 	}
 	
 	// Update is called once per frame

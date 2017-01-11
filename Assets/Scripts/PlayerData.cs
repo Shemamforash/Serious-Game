@@ -8,7 +8,7 @@ public class PlayerData : MonoBehaviour {
 	private static bool loaded = false;
 
 	private static int pathDanger = 10000, pathLength = 10000;
-	private static int lastScore, lastDanger, lastLength;
+	private static int lastScore, lastDanger, lastLength, lastCompassScore;
 
 	public void Awake () {
 		if(!loaded && File.Exists("Assets\\savedata.txt")){
@@ -47,6 +47,17 @@ public class PlayerData : MonoBehaviour {
 		}
 	}
 
+	public static void SetCompassScore(int score){
+		lastCompassScore = score;
+		if(score > PlayerData.GetCompassScore()){
+			PlayerData.compassScore = score;
+		}
+	}
+
+	public static int GetLastCompassScore(){
+		return lastCompassScore;
+	}
+
 	public static float GetLastScore(){
 		return lastScore;
 	}
@@ -63,13 +74,8 @@ public class PlayerData : MonoBehaviour {
 		return routeScore;
 	}
 
-	public static int CompassScore{
-		get{
-			return compassScore;
-		}
-		set {
-			compassScore = value;
-		}
+	public static int GetCompassScore(){
+		return compassScore;
 	}
 
 	public static float GetPathDanger() {

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class KeyboardMovement : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class KeyboardMovement : MonoBehaviour
     private GameObject currentObject;
     private Quaternion needleRotation;
     private RotationBehaviour rotationScript;
+    private float totalScore = 0;
 
     private bool movementLocked = false; //if movement locked is false directionHousing is the current object then movement is allowed, if movement locked true opposite is true
 
@@ -80,21 +82,20 @@ public class KeyboardMovement : MonoBehaviour
         //step logic for changing current vector and object
         if(step == 0){
             float angle = directionHousing.transform.rotation.eulerAngles.z;
-            float score1 = rotationScript.ScoreBetweenVectorAndAngle(angle, rotationScript.DefaultVector());
-            Debug.Log(score1);
+            totalScore += rotationScript.ScoreBetweenVectorAndAngle(angle, rotationScript.DefaultVector());
             movementLocked = true;
             currentObject = compassHousing;
         }
         else if(step == 1) {
             float angle = compassHousing.transform.rotation.eulerAngles.z;
-            float score2 = rotationScript.ScoreBetweenVectorAndAngle(angle, new Vector2(0, 1));
-            Debug.Log(score2);
+            totalScore += rotationScript.ScoreBetweenVectorAndAngle(angle, new Vector2(0, 1));
             currentObject = directionHousing;
         } else if (step == 2) {
             float angleA = compassNeedle.transform.rotation.eulerAngles.z;
             float angleB = compassHousing.transform.rotation.eulerAngles.z;
-            float score1 = rotationScript.ScoreBetweenAngleAndAngle(angleA, angleB);
-            Debug.Log(score1);
+            totalScore += rotationScript.ScoreBetweenAngleAndAngle(angleA, angleB);
+            PlayerData.SetCompassScore((int)(totalScore / 3));
+            SceneManager.LoadScene("Compass Score Screen");
         }
         ++step;
 

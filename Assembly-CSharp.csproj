@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\CompassScoreScreenScript.cs" />
      <Compile Include="Assets\Scripts\Exit.cs" />
      <Compile Include="Assets\Scripts\GraphBuild.cs" />
      <Compile Include="Assets\Scripts\KeyboardMovement.cs" />
