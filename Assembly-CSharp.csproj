@@ -59,9 +59,9 @@
      <Compile Include="Assets\Scripts\ScrollMap.cs" />
      <Compile Include="Assets\Scripts\StartGame.cs" />
      <Compile Include="Assets\Scripts\StudentTest.cs" />
+     <None Include="Assets\savedata.txt" />
      <None Include="Assets\Questions.txt" />
      <None Include="Assets\graph links.txt" />
-     <None Include="Assets\savedata.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

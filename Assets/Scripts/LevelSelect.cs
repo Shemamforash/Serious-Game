@@ -16,6 +16,6 @@ public class LevelSelect : MonoBehaviour {
 	}
 
 	public void LoadCompassReading(){
-		SceneManager.LoadScene("Compass Challenge");
+		SceneManager.LoadScene("Compass Guide");
 	}
 }
