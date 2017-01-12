@@ -35,14 +35,14 @@ public class PlayerData : MonoBehaviour {
 		}
 	}
 
-	public static void SetRouteScore(float pathDanger, float pathLength){
-		float score = pathLength + pathDanger;
+	public static void SetRouteScore(float danger, float length){
+		float score = length + danger;
 		PlayerData.lastScore = (int) score;
-		PlayerData.lastLength = (int) pathLength;
-		PlayerData.lastDanger = (int) pathDanger;
+		PlayerData.lastLength = (int) length;
+		PlayerData.lastDanger = (int) danger;
 		if(score < PlayerData.GetRouteScore()){
-			PlayerData.pathLength = (int) pathLength;
-			PlayerData.pathDanger = (int) pathDanger;
+			PlayerData.pathLength = (int) length;
+			PlayerData.pathDanger = (int) danger;
 			PlayerData.routeScore = (int)score;
 		}
 	}

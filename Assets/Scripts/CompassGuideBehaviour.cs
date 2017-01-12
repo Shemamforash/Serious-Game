@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class RouteGuideBehaviour : MonoBehaviour {
+public class CompassGuideBehaviour : MonoBehaviour {
 	public List<Sprite> steps = new List<Sprite>();
 	// Use this for initialization
 	private List<string> instructions = new List<string>();
@@ -25,7 +25,7 @@ public class RouteGuideBehaviour : MonoBehaviour {
 
 	public void NextStep(){
 		if(currentStep == steps.Count){
-			SceneManager.LoadScene("Route Challenge");
+			SceneManager.LoadScene("Compass Challenge");
 		} else {
 			stepImage.GetComponent<Image>().sprite = steps[currentStep];
 			stepInstructions.GetComponent<Text>().text = instructions[currentStep];
