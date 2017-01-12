@@ -11,15 +11,17 @@ public class CompassGuideBehaviour : MonoBehaviour {
 	private int currentStep = 0;
 	public GameObject stepImage, stepInstructions;
 	void Start () {
-		instructions.Add("The first step in plotting a route is to find your start point (shown in green). Now you need to look at the possible routes from this point to your goal. " +
-		"Here we have identified 2 potential points (in blue) to start off your route.");
-		instructions.Add("We decided to go with the highlighted route as it's shorter and should be easier to follow. " +
-		"You can decide whether a route is easy to follow based on the paths and roads on the map. " + 
-		"Now we continue plotting a route from the new point towards the destination.");
-		instructions.Add("Eventually we will have plotted a complete route to the destination. " +
-		"It's important to consider the length and the potential dangers of a route during planning.");
-		instructions.Add("Danger's can often be identified from the map symbols. " + 
-		"Here for example we have highlighted the dangers of steep climbs, major roads, and natural dangers like caves.");
+		instructions.Add("The components of a compass are easy to learn but you can sometimes get mixed up with the different arrows. " + 
+		"Here we have a compass with the most important parts labelled to make it easy for you to remember");
+		instructions.Add("The first step is to align the compass with the start and end points of your journey.");
+		instructions.Add("The direction of the travel arrow must point from start to end location. " + 
+		"Be careful as otherwise you will end up walking in the opposite direction. " + 
+		"Keep the compass on the map in this position.");
+		instructions.Add("At this point you must rotate the Compass Housing. Rotate the Compass Housing so that the orienting arrow is pointing North. " + 
+		"In most cases and in this situation, we will assume North is represented by the top of the map. ");
+		instructions.Add("In real life, you would now take the compass off the map and would hold it flat in your hands. " +
+		"However, here we must demonstrate on the map. Rotate the compass until the compass needle is between the lines of the compass housing. " +
+		"Follow the direction of the travel arrow to your destination. Take bearings throughout your journey to be sure you are walking in the correct direction.");
 		NextStep();
 	}
 
