@@ -35,6 +35,16 @@ public class PlayerData : MonoBehaviour {
 		}
 	}
 
+	public static int GetTestScore(){
+		return testScore;
+	}
+
+	public static void SetTestScore(int score) {
+		if(score > GetTestScore()){
+			testScore = score;
+		}
+	}
+
 	public static void SetRouteScore(float danger, float length){
 		float score = length + danger;
 		PlayerData.lastScore = (int) score;

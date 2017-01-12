@@ -59,7 +59,6 @@ public class StudentTest : MonoBehaviour {
 					reviseRoute = true;
 				}
 			}
-			Debug.Log(playerScore + "/" + totalScore);
 			NextQuestion();
 		}
 	}
@@ -80,10 +79,10 @@ public class StudentTest : MonoBehaviour {
 		if(suggestion != ""){
 			suggestion = "You could revise " + suggestion + ", then return and improve your score!";
 		}
-		Debug.Log(scoreContainer.transform.Find("Text"));
+		PlayerData.SetTestScore(playerScore);
 		scoreContainer.transform.Find("Text").GetComponent<Text>().text = "You finished the test!\n" +
 			"Final Score: " + playerScore + "/" + totalScore + "\n\n" +
-			suggestion;
+			"Best Score: " + PlayerData.GetTestScore() + "\n" + suggestion;
 		PlayerData.TestScore = playerScore;
 	}
 

@@ -18,7 +18,7 @@ public class RouteGuideBehaviour : MonoBehaviour {
 		"Now we continue plotting a route from the new point towards the destination.");
 		instructions.Add("Eventually we will have plotted a complete route to the destination. " +
 		"It's important to consider the length and the potential dangers of a route during planning.");
-		instructions.Add("Danger's can often be identified from the map symbols. " + 
+		instructions.Add("Dangers can often be identified from the map symbols. " + 
 		"Here for example we have highlighted the dangers of steep climbs, major roads, and natural dangers like caves.");
 		NextStep();
 	}
